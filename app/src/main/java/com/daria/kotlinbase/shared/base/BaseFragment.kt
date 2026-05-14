@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -42,13 +43,17 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
             is BaseCommand.PerformNavAction -> findNavController().navigate(command.navAction)
             is BaseCommand.GoBack -> findNavController().popBackStack()
             is BaseCommand.ShowSnackbar -> showSnackbar(command.message)
-            is BaseCommand.ShowToast -> showSnackbar(command.message)
+            is BaseCommand.ShowToast -> showToast(command.message)
             is BaseCommand.ShowError -> showSnackbar(command.message ?: getString(com.daria.kotlinbase.R.string.error_generic))
         }
     }
 
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
