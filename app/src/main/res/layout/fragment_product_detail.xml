@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_s"
-                    android:text="@{`$` + String.format(`%.2f`, viewModel.state.product.price)}"
+                    android:text="@{@string/product_price_format(viewModel.state.product.price)}"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:textColor="?attr/colorPrimary" />
 
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_xs"
-                    android:text="@{String.valueOf(viewModel.state.product.rating) + `★ (` + String.valueOf(viewModel.state.product.ratingCount) + `)`}"
+                    android:text="@{@string/product_rating_format(viewModel.state.product.rating, viewModel.state.product.ratingCount)}"
                     android:textAppearance="?attr/textAppearanceBodyMedium" />
 
                 <TextView

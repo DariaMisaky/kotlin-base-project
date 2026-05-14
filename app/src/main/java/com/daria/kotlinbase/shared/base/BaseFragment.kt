@@ -10,12 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.daria.kotlinbase.R
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes private val layoutId: Int,
 ) : Fragment() {
-
     private var _binding: B? = null
     protected val binding: B get() = _binding!!
 
@@ -31,7 +31,10 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.baseCmd.observe(viewLifecycleOwner) { command ->
             handleBaseCommand(command)
@@ -44,7 +47,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
             is BaseCommand.GoBack -> findNavController().popBackStack()
             is BaseCommand.ShowSnackbar -> showSnackbar(command.message)
             is BaseCommand.ShowToast -> showToast(command.message)
-            is BaseCommand.ShowError -> showSnackbar(command.message ?: getString(com.daria.kotlinbase.R.string.error_generic))
+            is BaseCommand.ShowError -> showSnackbar(command.message ?: getString(R.string.error_generic))
         }
     }
 

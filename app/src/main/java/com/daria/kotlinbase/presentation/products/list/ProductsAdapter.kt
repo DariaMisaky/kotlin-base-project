@@ -11,15 +11,23 @@ import com.daria.kotlinbase.domain.entities.Product
 class ProductsAdapter(
     private val onProductClick: (Int) -> Unit,
 ) : ListAdapter<Product, ProductsAdapter.ProductViewHolder>(DIFF) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val binding = ItemProductBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false,
-        )
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ProductViewHolder {
+        val binding =
+            ItemProductBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            )
         return ProductViewHolder(binding, onProductClick)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ProductViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
@@ -35,9 +43,17 @@ class ProductsAdapter(
     }
 
     companion object {
-        private val DIFF = object : DiffUtil.ItemCallback<Product>() {
-            override fun areItemsTheSame(oldItem: Product, newItem: Product) = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: Product, newItem: Product) = oldItem == newItem
-        }
+        private val DIFF =
+            object : DiffUtil.ItemCallback<Product>() {
+                override fun areItemsTheSame(
+                    oldItem: Product,
+                    newItem: Product,
+                ) = oldItem.id == newItem.id
+
+                override fun areContentsTheSame(
+                    oldItem: Product,
+                    newItem: Product,
+                ) = oldItem == newItem
+            }
     }
 }

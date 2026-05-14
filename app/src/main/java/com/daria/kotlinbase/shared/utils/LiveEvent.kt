@@ -11,10 +11,12 @@ import java.util.concurrent.atomic.AtomicBoolean
  * where plain LiveData replay would cause duplicate handling.
  */
 open class LiveEvent<T> : MediatorLiveData<T>() {
-
     private val wrappers = mutableListOf<Pair<LifecycleOwner, ObserverWrapper<in T>>>()
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
+    override fun observe(
+        owner: LifecycleOwner,
+        observer: Observer<in T>,
+    ) {
         val wrapper = ObserverWrapper(observer)
         wrappers.add(owner to wrapper)
         super.observe(owner, wrapper)

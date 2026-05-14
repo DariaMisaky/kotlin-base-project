@@ -10,14 +10,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProductListFragment :
     BaseFragment<FragmentProductListBinding, ProductListViewModel>(R.layout.fragment_product_list) {
-
     override val viewModel: ProductListViewModel by viewModel()
 
     private val productsAdapter by lazy {
         ProductsAdapter(onProductClick = viewModel::onProductClicked)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.productsRecycler.layoutManager = GridLayoutManager(context, GRID_SPAN)

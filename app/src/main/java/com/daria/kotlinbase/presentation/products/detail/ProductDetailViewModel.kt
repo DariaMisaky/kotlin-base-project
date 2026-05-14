@@ -13,7 +13,6 @@ class ProductDetailViewModel(
     private val productId: Int,
     private val getProductDetailUseCase: GetProductDetailUseCase,
 ) : BaseViewModel() {
-
     private val _state = MutableLiveData(ProductDetailUiState())
     val state: LiveData<ProductDetailUiState> = _state
 
@@ -29,16 +28,25 @@ class ProductDetailViewModel(
 
     private fun loadDetail() {
         viewModelScope.launch {
-            _state.value = ProductDetailUiState(isLoading = true)
+            _state.value =
+                _state.value?.copy(
+                    isLoading = true,
+                    errorMessage = null,
+                )
             when (val result = getProductDetailUseCase.executeNow(productId)) {
-                is Result.Success -> _state.value = ProductDetailUiState(
-                    isLoading = false,
-                    product = result.data,
-                )
-                is Result.Error -> _state.value = ProductDetailUiState(
-                    isLoading = false,
-                    errorMessage = result.error,
-                )
+                is Result.Success ->
+                    _state.value =
+                        _state.value?.copy(
+                            isLoading = false,
+                            product = result.data,
+                            errorMessage = null,
+                        )
+                is Result.Error ->
+                    _state.value =
+                        _state.value?.copy(
+                            isLoading = false,
+                            errorMessage = result.error,
+                        )
             }
         }
     }

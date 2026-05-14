@@ -1,11 +1,12 @@
 package com.daria.kotlinbase.shared.base
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ApiError(
-    val message: String = "",
-    val code: String = "",
-    val errors: List<String>? = null,
+    @SerializedName("message") val message: String = "",
+    @SerializedName("code") val code: String = "",
+    @SerializedName("errors") val errors: List<String>? = null,
 ) : Parcelable

@@ -11,14 +11,16 @@ import org.koin.core.parameter.parametersOf
 
 class ProductDetailFragment :
     BaseFragment<FragmentProductDetailBinding, ProductDetailViewModel>(R.layout.fragment_product_detail) {
-
     private val args by navArgs<ProductDetailFragmentArgs>()
 
     override val viewModel: ProductDetailViewModel by viewModel {
         parametersOf(args.productId)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
     }
