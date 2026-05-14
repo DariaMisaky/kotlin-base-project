@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Kotlin Base</string>
+
+    <!-- Products -->
+    <string name="products_title">Products</string>
+    <string name="product_detail_title">Product Detail</string>
+    <string name="empty_products">No products to show.</string>
+
+    <!-- Generic UI -->
+    <string name="loading">Loading…</string>
+    <string name="retry">Retry</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_back">Back</string>
+    <string name="cd_product_image">Product image</string>
+</resources>
