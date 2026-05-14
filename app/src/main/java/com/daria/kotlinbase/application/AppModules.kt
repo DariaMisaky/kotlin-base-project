@@ -5,6 +5,9 @@ import com.daria.kotlinbase.data.repositories.ProductRepositoryImpl
 import com.daria.kotlinbase.domain.abstractions.ProductRepository
 import com.daria.kotlinbase.domain.usecases.GetProductDetailUseCase
 import com.daria.kotlinbase.domain.usecases.GetProductsUseCase
+import com.daria.kotlinbase.presentation.products.detail.ProductDetailViewModel
+import com.daria.kotlinbase.presentation.products.list.ProductListViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object AppModules {
@@ -22,5 +25,10 @@ object AppModules {
         single { GetProductDetailUseCase(get()) }
     }
 
-    val modules = listOf(apiModule, repoModule, useCases)
+    private val viewModels = module {
+        viewModel { ProductListViewModel(get()) }
+        viewModel { (productId: Int) -> ProductDetailViewModel(productId, get()) }
+    }
+
+    val modules = listOf(apiModule, repoModule, useCases, viewModels)
 }
