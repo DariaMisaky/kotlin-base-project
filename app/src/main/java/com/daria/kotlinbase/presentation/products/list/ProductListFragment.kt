@@ -3,7 +3,6 @@ package com.daria.kotlinbase.presentation.products.list
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.daria.kotlinbase.BR
 import com.daria.kotlinbase.R
 import com.daria.kotlinbase.databinding.FragmentProductListBinding
 import com.daria.kotlinbase.shared.base.BaseFragment
@@ -20,16 +19,9 @@ class ProductListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.setVariable(BR.viewModel, viewModel)
-        binding.productsRecycler.apply {
-            layoutManager = GridLayoutManager(context, GRID_SPAN)
-            adapter = productsAdapter
-        }
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            productsAdapter.submitList(state.products)
-        }
-        binding.swipeRefresh.setOnRefreshListener { viewModel.onRefresh() }
-        binding.retryButton.setOnClickListener { viewModel.onRetry() }
+        binding.viewModel = viewModel
+        binding.productsRecycler.layoutManager = GridLayoutManager(context, GRID_SPAN)
+        binding.productsRecycler.adapter = productsAdapter
     }
 
     companion object {

@@ -20,6 +20,7 @@
             android:title="@string/product_detail_title"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationContentDescription="@string/cd_back"
+            app:onNavigationClick="@{() -> viewModel.onBack()}"
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="?attr/colorOnSurface" />
 
@@ -110,6 +111,7 @@
                 android:id="@+id/retryButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.onRetry()}"
                 android:text="@string/retry" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
